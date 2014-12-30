@@ -1,4 +1,7 @@
 *.pyc
 /*.egg
 /*.egg-info
+/AUTHORS
+/Changelog
 /build
+/dist
