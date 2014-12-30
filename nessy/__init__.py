@@ -57,8 +57,7 @@ def parse_args():
                         default=os.environ.get('GENOME_NESSY_SERVER'),
                         help='Claims url (http://nessy.example.com)')
 
-    parser.add_argument('--action', choices=['count', 'list', 'revoke'],
-                        required=True)
+    parser.add_argument('action', choices=['count', 'list', 'revoke'])
     parser.add_argument('--limit', type=int, default=10,
                         help='maximum claims returned per request')
     parser.add_argument('--max-claims', type=int, default=50, dest='max_claims',
