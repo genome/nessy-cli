@@ -10,6 +10,12 @@ import urlparse
 LOG = logging.getLogger()
 
 
+URL_ENVLIST = [
+    'NESSY_CLAIMS_URL',
+    'GENOME_NESSY_SERVER',
+]
+
+
 def _get_claims(url, limit, offset, constraints):
     params = dict(constraints)
     params['limit'] = limit
@@ -46,6 +52,12 @@ def _list_claims(claim_urls):
     return 0
 
 
+def _first_not_none(*args):
+    for envname in args:
+        if os.environ.get(envname):
+            return os.environ[envname]
+
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--log-level', default='WARNING', dest='log_level',
@@ -54,7 +66,7 @@ def parse_args():
                         help='Threshold for logging messages')
 
     parser.add_argument('--url', '-u',
-                        default=os.environ.get('GENOME_NESSY_SERVER'),
+                        default=_first_not_none(*URL_ENVLIST),
                         help='Claims url (http://nessy.example.com)')
 
     parser.add_argument('action', choices=['count', 'list', 'revoke'])
