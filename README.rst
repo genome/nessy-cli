@@ -10,7 +10,7 @@ It is simplest to install via PyPI using:
 
 ::
 
-    pip install nessy
+    pip install nessy-cli
 
 Usage
 -----
