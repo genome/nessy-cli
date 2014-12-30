@@ -16,8 +16,8 @@
 # along with nessy-cli.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from pprint import pprint
 import argparse
+import json
 import logging
 import os
 import requests
@@ -61,7 +61,8 @@ def _list_claims(claim_urls):
     for url in claim_urls:
         response = requests.get(url)
         if response.status_code == 200:
-            pprint(response.json())
+            print json.dumps(response.json(), sort_keys=True, indent=4,
+                             separators=(',', ': '))
         else:
             LOG.warn('Failed to get data for claim: %s', url)
 
